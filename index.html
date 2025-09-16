@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jadwal Kuliah Semester 3</title>
+    <link rel="icon" type="image/x-icon" href="https://puskesmasponggok.blitarkab.go.id/wp-content/uploads/2022/01/shift-kerja.jpg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(45deg, #50ff29, #9b53ff);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/><circle cx="90" cy="40" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .name {
+            font-size: 20px;
+            text-shadow: #f8f9fa;
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            color: whitesmoke;
+            font-weight: 700;
+            
+        }
+
+        .total-sks {
+            font-size: 1.1em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .schedule-container {
+            padding: 30px;
+        }
+
+        .day-schedule {
+            margin-bottom: 20px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .day-schedule:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .senin { background: linear-gradient(135deg, #9affa2, #fecfef); }
+        .selasa { background: linear-gradient(135deg, #1c85d5, #e3fc9f); }
+        .rabu { background: linear-gradient(135deg, #a8edea, #fed6e3); }
+        .kamis { background: linear-gradient(135deg, #ffe89b, #1b7b19); }
+        .jumat { background: linear-gradient(135deg, #a8ea66, #4ba0a2); }
+        .sabtu { background: linear-gradient(135deg, #66eaea, rgba(58, 17, 68, 0.53333))}
+
+        .schedule-item {
+            padding: 18px 25px;
+            color: #2c3e50;
+            font-weight: 600;
+            font-size: 1em;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+        }
+
+        .schedule-item:last-child {
+            border-bottom: none;
+        }
+
+        .time {
+            color: #34495e;
+            font-weight: 700;
+        }
+
+        .subject {
+            margin-left: 10px;
+            font-weight: 600;
+        }
+
+        .room {
+            display: inline-block;
+            background: rgba(255, 255, 255,  0.4);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 700;
+            margin-left: 10px;
+            color: #2c3e50;
+
+        }
+
+        .text{
+            text-align: center;
+            font-size: medium;
+            border-width: 10px;
+            display:inline-block;
+            background-color: pink;
+            border-radius: 12px;
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.9em;
+            border-top: 1px solid #e9ecef;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .schedule-container {
+                padding: 20px;
+            }
+
+            .schedule-item {
+                padding: 15px 20px;
+                font-size: 0.9em;
+            }
+            .text{
+                padding: 20px 70px;
+                font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            }
+        }
+
+        .icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Jadwal Kuliah Semester 3</h1>
+            <span class="name">Monica</span>
+            <br></br>
+            <div class="total-sks">Total 24 SKS</div>
+        </div>
+
+        <div class="schedule-container">
+            <div class="day-schedule senin">
+                <div class="schedule-item">
+                    <span class="icon">🗓️</span>
+                    <span class="time">Senin | 10:10 - 11:50</span> | 
+                    <span class="subject">Statistika 2</span>
+                    <span class="room">(C) 701</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="icon">⚙️</span>
+                    <span class="time">Senin | 16:00 - 19:10</span>
+                    <span class="subject">Prak. Perancangan Sistem Kerja & Ergonomi</span>
+                    <span class="room">(C) [Lab PSKE] </span>
+                </div>
+            </div>
+
+            <div class="day-schedule selasa">
+                <div class="schedule-item">
+                    <span class="icon"></span>
+                    <span class="time">Selasa | 08:10 - 09:50 </span>
+                    <span class="subject"> Kewarganegaraan</span>
+                    <span class="room">(C42) 903</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="icon">💻</span>
+                    <span class="time">Selasa | 10:10 - 11:50</span> | 
+                    <span class="subject">Analitika Data</span>
+                    <span class="room">(C) 903</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="icon">⚡</span>
+                    <span class="time">Selasa | 16:00 - 17:40</span> | 
+                    <span class="subject">Pengukuran & Perancangan Sistem Kerja</span>
+                    <span class="room">(C) 701</span>
+                </div>
+            </div>
+
+            <div class="day-schedule rabu">
+                <div class="schedule-item">
+                    <span class="icon">🛠️</span>
+                    <span class="time">Rabu | 13:00 - 15:50</span> | 
+                    <span class="subject">Prak. Proses Manufaktur</span>
+                    <span class="room">(C) [Lab Manufaktur]</span>
+                </div>
+              
+            </div>
+
+            <div class="day-schedule kamis">
+                <div class="schedule-item">
+                    <span class="icon">📊</span>
+                    <span class="time">Kamis | 07:20 - 09:00</span> | 
+                    <span class="subject">Ergonomika</span>
+                    <span class="room">(C) 109</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="icon">🔧</span>
+                    <span class="time">Kamis | 10:10 - 11:50</span> | 
+                    <span class="subject">Proses Manufaktur</span>
+                    <span class="room">(C) 110</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="icon">🌍</span>
+                    <span class="time">Kamis | 13:00 - 15:30</span> | 
+                    <span class="subject">Riset Operasi 1</span>
+                    <span class="room">(C) 705</span>
+                </div>
+            </div>
+
+            <div class="day-schedule jumat">
+                <div class="schedule-item">
+                    <span class="icon">🛢️</span>
+                    <span class="time">Jumat | 10:10 - 11:50</span> | 
+                    <span class="subject">Rantai Pasok Sistem Energi</span>
+                    <span class="room">(F42) 1004</span>
+                </div>
+            </div>
+
+            <div class="day-schedule sabtu">
+                <div class="schedule-item">
+                    <span class="icon">🍃</span>
+                    <span class="time">Sabtu | 10:10 - 11:50</span>
+                    <span class="subject">Transisi Energi & Lingkungan</span>
+                    <span class="room">(F42) 701</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="icon">🧮</span>
+                    <span class="time">Sabtu | 13:00 - 15:30</span>
+                    <span class="subject">Ekonomika & Ekonomi</span>
+                    <span class="room">(C) 109</span>
+                </div>
+            </div>
+            <div class="word">
+            <span class="text">Ini Jadwalmu ya sayanggkuu  >< 💖💓</span>
+            </div>
+        </div>
+        <div class="footer">
+        </div>
+    </div>
+</body>
+</html>
